@@ -4,7 +4,7 @@ using System.Text;
 
 namespace СonstructorVVK.data
 {
-    enum TypeQuestion
+    public enum TypeQuestion
     {
         //типы вопросов
         QUESTION_NUM_INT,

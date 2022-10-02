@@ -21,26 +21,24 @@ namespace СonstructorVVK.data
                 OnPropertyChanged();
             }
         }
-        public TypeQuestion TypeQuestion
-        {
-            get { return mTypeQuestion; }
-            set
-            {
-                mTypeQuestion = value;
-                OnPropertyChanged();
-            }
-        }
 
+        public TypeQuestion GetType()
+        { return mTypeQuestion; }
+        public void SetType(TypeQuestion value)
+        {
+            mTypeQuestion = value;
+            OnPropertyChanged();
+        }
 
         // слушатели изменений
         public event PropertyChangedEventHandler PropertyChanged;
-        public event PropertyChangedEventHandler PropertyChanged;
+      
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
-
+        
     }
 }
