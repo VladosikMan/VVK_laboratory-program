@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:СonstructorVVK"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Icon="recources/images/logo.png"
+        Title="{StaticResource app_name}" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*" />
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Height="Auto" Grid.Row="0" >
+            <MenuItem Header="Файл" >
 
+                <MenuItem Header="Открыть" >
+                    <MenuItem Header="Лабораторную"/>
+                    <MenuItem Header="Тему" />
+                    <MenuItem Header="Вопрос" />
+                </MenuItem>
+                <MenuItem Header="Сохранить" />
+                <Separator />
+                <MenuItem Header="Выход" />
+            </MenuItem>
+            <MenuItem Header="Справка" >
+                <MenuItem Header="Обучение работе"/>
+                <MenuItem Header="О программе" />
+            </MenuItem>
+        </Menu>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" >
+            <Label Content="{StaticResource discipline}" FontSize="18" FontWeight="Bold" VerticalContentAlignment="Center" Margin="10 0 0 0 "/>
+            <Label Content="ВВК" FontSize="18" FontWeight="Bold" VerticalContentAlignment="Center" Margin="0 0 10 0 "/>
+            <Separator />
+            <ToggleButton  Margin="5">
+                <Image Source="recources/images/open_folder.png" Margin="5"/>
+            </ToggleButton>
+            <ToggleButton  Margin="5">
+                <Image Source="recources/images/save_icon.png" Margin="5"/>
+            </ToggleButton>
+            <ToggleButton  Margin="5">
+                <Image Source="recources/images/play_icon.png" Margin="5"/>
+            </ToggleButton>
+            <ToggleButton  Margin="5">
+                <Image Source="recources/images/faq_icon.png" Margin="5"/>
+            </ToggleButton>
+        </StackPanel>
+        <GridSplitter Grid.Row="2"  Height="3"
+        HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <!-- Тут главный интервеймс!-->
+        
+        <Button Height="200" Width="200" Background="DarkBlue" Grid.Row="3"/>
     </Grid>
 </Window>
