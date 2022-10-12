@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--текстовые ресурсы!-->
+
+    <sys:String x:Key="app_name">Конструктор лабораторных 3000</sys:String>
+    <sys:String x:Key="discipline">Дисциплина - </sys:String>
+   
+</ResourceDictionary>
