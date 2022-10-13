@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace ModelsLibrary.Extensions
+namespace ClientLab.Extensions
 {
     public static class EnumExtensions
     {
