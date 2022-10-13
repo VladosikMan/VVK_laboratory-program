@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientLab"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Icon="recources/images/logo.png"
+        Title="{StaticResource app_name}" Height="264" Width="330">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="{StaticResource registr_label}"  Grid.Row="0" FontSize="18" FontWeight="Bold" VerticalContentAlignment="Center"  HorizontalAlignment="Center"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0 10 0 0">
+            <Label Content="ФИО"  Grid.Row="0" FontSize="14" FontWeight="Bold"  HorizontalAlignment="Center"/>
+            <TextBox MaxLength="250" Width="200"/>
+            <Label Content="Группа"  Grid.Row="0" FontSize="14" FontWeight="Bold"  HorizontalAlignment="Center"/>
+            <ComboBox SelectedIndex="0">
+                <TextBlock>ИВТб-4</TextBlock>
+                <TextBlock>ИВТм-4</TextBlock>
+            </ComboBox>
+            <Button Content="Принять"  Margin="0 20 0 0"/>
+        </StackPanel>
     </Grid>
 </Window>
