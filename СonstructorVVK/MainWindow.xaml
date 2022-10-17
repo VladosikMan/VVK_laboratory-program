@@ -16,7 +16,6 @@
         </Grid.RowDefinitions>
         <Menu Height="Auto" Grid.Row="0" >
             <MenuItem Header="Файл" >
-
                 <MenuItem Header="Открыть" >
                     <MenuItem Header="Лабораторную"/>
                     <MenuItem Header="Тему" />
@@ -33,7 +32,7 @@
         </Menu>
         <StackPanel Orientation="Horizontal" Grid.Row="1" >
             <Label Content="{StaticResource discipline}" FontSize="18" FontWeight="Bold" VerticalContentAlignment="Center" Margin="10 0 0 0 "/>
-            <Label Content="ВВК" FontSize="18" FontWeight="Bold" VerticalContentAlignment="Center" Margin="0 0 10 0 "/>
+            <Label Name="label" Content="ВВК" FontSize="18" FontWeight="Bold" VerticalContentAlignment="Center" Margin="0 0 10 0 "/>
             <Separator />
             <ToggleButton  Margin="5">
                 <Image Source="recources/images/open_folder.png" Margin="5"/>
@@ -52,6 +51,6 @@
         HorizontalAlignment="Stretch" VerticalAlignment="Center" />
         <!-- Тут главный интервеймс!-->
         
-        <Button Height="200" Width="200" Background="DarkBlue" Grid.Row="3"/>
+        <Button Height="200" Width="200" Background="DarkBlue" Grid.Row="3" Click="Button_Click"/>
     </Grid>
 </Window>
