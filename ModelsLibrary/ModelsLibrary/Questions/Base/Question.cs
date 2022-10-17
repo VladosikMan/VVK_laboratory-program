@@ -5,8 +5,14 @@ using System.Text;
 
 namespace ModelsLibrary.Questions
 {
-    public abstract class Question : IQuestion<Question>
+    public abstract class Question : IQuestion<Question>, ISharedScoped
     {
+        protected SharedScope mSharedScope;
+        public SharedScope SharedScope
+        {
+            get { return mSharedScope; }
+           
+        }
         /// <summary>
         /// Тип вопроса.
         /// </summary>
@@ -51,6 +57,11 @@ namespace ModelsLibrary.Questions
         public void SetPicture(byte[] picture)
         {
             PictureBytes = picture;
+        }
+
+        public void SetSharedScope(SharedScope sharedScope)
+        {
+            mSharedScope = sharedScope;
         }
 
         public Question(string text, double rate)

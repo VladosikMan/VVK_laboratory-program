@@ -9,8 +9,8 @@ namespace ModelsLibrary.Questions
     {
         public string Expression { get; set; }
 
-        [JsonProperty]
-        private SharedScope SharedScope;
+        //[JsonProperty]
+        //private SharedScope SharedScope;
 
         public TaskQuestion(string text, double rate, string expression) 
             : base(text, string.Empty, rate)
@@ -33,9 +33,10 @@ namespace ModelsLibrary.Questions
             return Rate;
         }
 
-        public void SetSharedScope(SharedScope sharedScope)
+     /*   public void SetSharedScope(SharedScope sharedScope)
         {
             SharedScope = sharedScope;
-        }
+        }*/
+
     }
 }
