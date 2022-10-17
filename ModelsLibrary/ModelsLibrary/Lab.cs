@@ -10,6 +10,12 @@ namespace ModelsLibrary
     [Serializable]
     public class Lab
     {
+        public Lab(string json)
+        {
+            Deserialize(json);
+        }
+
+
         public string Name { get; set; }
 
         [JsonProperty]
