@@ -50,11 +50,7 @@
         <GridSplitter Grid.Row="2"  Height="3"
         HorizontalAlignment="Stretch" VerticalAlignment="Center" />
         <!-- Тут главный интервеймс!-->
-        <StackPanel Grid.Row="3">
-            <Button Height="200" Width="200" Background="DarkBlue"  Click="Button_Click"/>
-            <Button Height="200" Width="200" Background="DarkBlue" Click="Button_Click_1"  />
-
-        <ContentPresenter Grid.Row="3" x:Name="OutputView" />
-        </Grid>
+       <ContentPresenter Grid.Row="3" x:Name="OutputView" />
+           
     </Grid>
 </Window>
