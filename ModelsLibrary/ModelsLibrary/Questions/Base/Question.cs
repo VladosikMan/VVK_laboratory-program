@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿
+using ModelsLibrary.Questions.Scope;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -63,6 +65,8 @@ namespace ModelsLibrary.Questions
         {
             mSharedScope = sharedScope;
         }
+
+      
 
         public Question(string text, double rate)
         {

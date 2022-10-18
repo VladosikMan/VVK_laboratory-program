@@ -1,4 +1,5 @@
 ﻿using ModelsLibrary.Questions;
+using ModelsLibrary.Questions.Scope;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

@@ -1,24 +1,12 @@
 ﻿
 using ModelsLibrary;
 using ModelsLibrary.Questions;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using СonstructorVVK.ViewModel;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using ModelsLibrary.Questions.Scope;
+using ModelsLibrary.Questions.Variants;
 
 namespace СonstructorVVK
 {
@@ -56,9 +44,34 @@ namespace СonstructorVVK
         {
             //создавать новую лабу тип и обновлять данные
             mainViewModel.createLab();
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var scope = new SharedScope();
+            scope.AddVariable("A",5);
+            scope.GetVariable("A").AddVariant(new VariantInterval(VariantsType.RandomInterval, new List<double> {14,456 }));
+            scope.GetVariable("A").AddVariant(new VariantList(VariantsType.RandomInterval, new List<double> {2,4,6,8 }));
+            scope.GetVariable("A").AddVariant(new VariantConstant(VariantsType.RandomInterval, 564));
+
+            var variable = scope.GetVariable("A").GenerateVariant(0);
+            var variable1 = scope.GetVariable("A").GenerateVariant(1);
+            var variable2 = scope.GetVariable("A").GenerateVariant(2);
+            var variable3 = scope.GetVariable("A").GenerateVariant(3);
+            var que = new ChoiceQuestion("Кто живет в Африке?", new List<string>()
+                {
+                    "Слон",
+                    "Мартышка",
+                    "Белый медведь"
+                }, new List<string>()
+                {
+                    "Слон",
+                    "Мартышка"
+                }, 15);
+          
+
         }
     }
-
-   
-
 }
+

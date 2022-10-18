@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ModelsLibrary.Questions
+namespace ModelsLibrary.Questions.Scope
 {
     public class SharedScope
     {
-      //  public List<Var> Vars { get; set; }
-        private Dictionary<string, Var> Vars {get;set;}
+        //  public List<Var> Vars { get; set; }
+        private Dictionary<string, Var> Vars { get; set; }
         public SharedScope()
         {
             //Vars = new List<Var>();
@@ -17,8 +17,12 @@ namespace ModelsLibrary.Questions
         public void AddVariable(string name, double value)
         {
             //Vars.Add(new Var(name, value));
-            //Vars.Add(new Var(name, value));
             Vars.Add(name, new Var(name, value));
+        }
+        public void AddVariable(string name)
+        {
+            //Vars.Add(new Var(name, value));
+            Vars.Add(name, new Var(name, 0));
         }
         public void DeleteVariable(string key)
         {

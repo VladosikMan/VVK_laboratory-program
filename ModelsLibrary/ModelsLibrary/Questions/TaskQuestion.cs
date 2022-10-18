@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ModelsLibrary.Questions
 {
-    public class TaskQuestion : TextQuestion, ISharedScoped
+    public class TaskQuestion : TextQuestion
     {
         public string Expression { get; set; }
 
