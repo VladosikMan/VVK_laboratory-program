@@ -35,10 +35,10 @@
             <Label Content="{StaticResource discipline}" FontSize="18" FontWeight="Bold" VerticalContentAlignment="Center" Margin="10 0 0 0 "/>
             <Label Content="ВВК" FontSize="18" FontWeight="Bold" VerticalContentAlignment="Center" Margin="0 0 10 0 "/>
             <Separator />
-            <ToggleButton  Margin="5">
+            <ToggleButton  Margin="5" Command="{Binding LoadMainUCCommand}">
                 <Image Source="recources/images/open_folder.png" Margin="5"/>
             </ToggleButton>
-            <ToggleButton  Margin="5">
+            <ToggleButton  Margin="5" Command="{Binding LoadSettingsUCCommand}">
                 <Image Source="recources/images/save_icon.png" Margin="5"/>
             </ToggleButton>
             <ToggleButton  Margin="5">
@@ -51,7 +51,7 @@
         <GridSplitter Grid.Row="2"  Height="3"
         HorizontalAlignment="Stretch" VerticalAlignment="Center" />
         <!-- Тут главный интервеймс!-->
-        
-        <Button Height="200" Width="200" Background="DarkBlue" Grid.Row="3"/>
+
+        <ContentPresenter Grid.Row="3" x:Name="OutputView" />
     </Grid>
 </Window>
