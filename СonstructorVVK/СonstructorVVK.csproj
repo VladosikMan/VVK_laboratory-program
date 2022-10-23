@@ -11,9 +11,13 @@
     <None Remove="recources\images\faq_icon.png" />
     <None Remove="recources\images\icon.png" />
     <None Remove="recources\images\logo.png" />
+    <None Remove="recources\images\minus.png" />
     <None Remove="recources\images\open_folder.png" />
+    <None Remove="recources\images\pen.png" />
     <None Remove="recources\images\play_icon.png" />
+    <None Remove="recources\images\plus.png" />
     <None Remove="recources\images\save_icon.png" />
+    <None Remove="recources\images\settings.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,13 +41,25 @@
     <Resource Include="recources\images\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="recources\images\minus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="recources\images\open_folder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="recources\images\pen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="recources\images\play_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="recources\images\plus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="recources\images\save_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="recources\images\settings.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

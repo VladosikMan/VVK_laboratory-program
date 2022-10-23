@@ -14,21 +14,20 @@ namespace СonstructorVVK
 {
    public partial class MainWindow : Window, IMainWindowsCodeBehind
     {
-        private MainViewModel mainViewModel;
+        private MainWindowViewModel mainVM;
         public MainWindow()
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
+
+           
+
         }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //загрузка вьюмодел для кнопок меню
-            MainWindowViewModel vm = new MainWindowViewModel();
-            //даем доступ к этому кодбихайнд
-            vm.CodeBehind = this;
-            //делаем эту вьюмодел контекстом данных
-            this.DataContext = vm;
-            //загрузка стартовой View
+            mainVM = new MainWindowViewModel();
+            mainVM.CodeBehind = this;
+            this.DataContext = mainVM;
             LoadView(ViewType.Main);
         }
         public void LoadView(ViewType typeView)
@@ -36,18 +35,11 @@ namespace СonstructorVVK
             switch (typeView)
             {
                 case ViewType.Main:
-                    //загружаем вьюшку, ее вьюмодель
                     MainView view = new MainView();
-                    MainViewModel vm = new MainViewModel(this);
-                    //связываем их м/собой
-                    view.DataContext = vm;
-                    //отображаем
                     this.OutputView.Content = view;
                     break;
                 case ViewType.Settings:
                     SettingsView viewF = new SettingsView();
-                    SettingsViewModel vmF = new SettingsViewModel(this);
-                    viewF.DataContext = vmF;
                     this.OutputView.Content = viewF;
                     break;
             }

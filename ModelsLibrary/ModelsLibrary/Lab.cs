@@ -24,7 +24,7 @@ namespace ModelsLibrary
         private int SuccessPercent { get; set; }
 
         [JsonProperty]
-        private List<Subject> Subjects { get; set; }
+        public List<Subject> Subjects { get; set; }
 
         [JsonProperty]
         private List<SharedScope> SharedScopes { get; set; }
