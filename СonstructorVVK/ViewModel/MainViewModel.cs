@@ -14,9 +14,20 @@ namespace СonstructorVVK.ViewModel
 {
    public  class MainViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Phone> Phones { get; set; }
+     
         public ObservableCollection<Lab> Labs { get; set; }
 
+
+        private Lab selectedLab;
+        public Lab SelectedLab
+        {
+            get { return selectedLab; }
+            set
+            {
+                selectedLab = value;
+              
+            }
+        }
         public MainViewModel()
         {
             Labs = new ObservableCollection<Lab>();
@@ -70,6 +81,8 @@ namespace СonstructorVVK.ViewModel
 
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+
         //Fields
         private IMainWindowsCodeBehind _MainCodeBehind;
 
@@ -81,10 +94,6 @@ namespace СonstructorVVK.ViewModel
             _MainCodeBehind = codeBehind;
         }
         //привязанные данные
-    
-
-
-
         //сохранение json лабы в папку
         public void saveLab(Lab lab)
         {
@@ -110,6 +119,4 @@ namespace СonstructorVVK.ViewModel
             Labs.Add(lab);
         }
     }
-
-
 }

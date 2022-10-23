@@ -8,5 +8,6 @@ namespace СonstructorVVK.View
     {
         Main,
         Settings,
+        CreateQuestion,
     }
 }

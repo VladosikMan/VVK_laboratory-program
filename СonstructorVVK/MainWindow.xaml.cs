@@ -28,7 +28,7 @@ namespace СonstructorVVK
             mainVM = new MainWindowViewModel();
             mainVM.CodeBehind = this;
             this.DataContext = mainVM;
-            LoadView(ViewType.Main);
+            LoadView(ViewType.CreateQuestion);
         }
         public void LoadView(ViewType typeView)
         {
@@ -41,6 +41,10 @@ namespace СonstructorVVK
                 case ViewType.Settings:
                     SettingsView viewF = new SettingsView();
                     this.OutputView.Content = viewF;
+                    break;
+                case ViewType.CreateQuestion:
+                    CreateQuestionView viewC = new CreateQuestionView();
+                    this.OutputView.Content = viewC;
                     break;
             }
 
