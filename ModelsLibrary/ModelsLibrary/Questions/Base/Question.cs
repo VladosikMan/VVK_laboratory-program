@@ -1,12 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿
+using ModelsLibrary.Questions.Scope;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ModelsLibrary.Questions
 {
-    public abstract class Question : IQuestion<Question>
+    public abstract class Question : IQuestion<Question>, ISharedScoped
     {
+        protected SharedScope mSharedScope;
+        public SharedScope SharedScope
+        {
+            get { return mSharedScope; }
+           
+        }
         /// <summary>
         /// Тип вопроса.
         /// </summary>
@@ -52,6 +60,13 @@ namespace ModelsLibrary.Questions
         {
             PictureBytes = picture;
         }
+
+        public void SetSharedScope(SharedScope sharedScope)
+        {
+            mSharedScope = sharedScope;
+        }
+
+      
 
         public Question(string text, double rate)
         {

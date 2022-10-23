@@ -1,4 +1,5 @@
 ﻿using ModelsLibrary.Questions;
+using ModelsLibrary.Questions.Scope;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,14 @@ namespace ModelsLibrary
     [Serializable]
     public class Lab
     {
+        public Lab(string json)
+        {
+            Deserialize(json);
+        }
+
+
         public string Name { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty]
         private int SuccessPercent { get; set; }
@@ -55,6 +63,13 @@ namespace ModelsLibrary
             Name = name;
             SuccessPercent = successPercent;
         }
+        public Lab(string name, int successPercent, int id) : this()
+        {
+            Name = name;
+            SuccessPercent = successPercent;
+            Id = id;
+        }
+
 
         public List<Question> GetQuestionsBySubject(string subjectTitle)
         {
