@@ -259,6 +259,12 @@ namespace DemoApp
                 SettingsDesignerItem settingsDesignerItem = new SettingsDesignerItem(diagramViewModel.Items.IndexOf(settingsItemVM), settingsItemVM.Left, settingsItemVM.Top, settingsItemVM.ItemWidth, settingsItemVM.ItemHeight, settingsItemVM.Setting1);
                 designerItem.DesignerItems.Add(new DiagramItemData(settingsDesignerItem.Id, typeof(SettingsDesignerItem)));
             }
+            //Save all SettingsDesignerItemViewModel
+            foreach (var uvvItemVM in diagramViewModel.Items.OfType<UvvDesignerItemViewModel>())
+            {
+                UvvDesignerItem uvvDesignerItem = new UvvDesignerItem(diagramViewModel.Items.IndexOf(uvvItemVM), uvvItemVM.Left, uvvItemVM.Top, uvvItemVM.ItemWidth, uvvItemVM.ItemHeight, uvvItemVM.Setting1);
+                designerItem.DesignerItems.Add(new DiagramItemData(uvvDesignerItem.Id, typeof(UvvDesignerItem)));
+            }
             //Save all GroupingDesignerItemViewModel
             foreach (var groupingItemVM in diagramViewModel.Items.OfType<GroupingDesignerItemViewModel>())
             {
@@ -296,6 +302,12 @@ namespace DemoApp
 	            PersistDesignerItem persistDesignerItem = new PersistDesignerItem(diagramViewModel.Items.IndexOf(persistItemVM), persistItemVM.Left, persistItemVM.Top, persistItemVM.ItemWidth, persistItemVM.ItemHeight, persistItemVM.HostUrl);
                 persistItemVM.Id = databaseAccessService.SavePersistDesignerItem(persistDesignerItem);
                 wholeDiagramToSave.DesignerItems.Add(new DiagramItemData(persistDesignerItem.Id, typeof(PersistDesignerItem)));
+            }
+            foreach (var uvvItemVM in diagramViewModel.Items.OfType<UvvDesignerItemViewModel>())
+            {
+                UvvDesignerItem uvvDesignerItem = new UvvDesignerItem(diagramViewModel.Items.IndexOf(uvvItemVM), uvvItemVM.Left, uvvItemVM.Top, uvvItemVM.ItemWidth, uvvItemVM.ItemHeight, uvvItemVM.Setting1);
+                uvvItemVM.Id = databaseAccessService.SaveUvvDesignerItem(uvvDesignerItem);
+                wholeDiagramToSave.DesignerItems.Add(new DiagramItemData(uvvDesignerItem.Id, typeof(UvvDesignerItem)));
             }
             //Save all SettingsDesignerItemViewModel
             foreach (var settingsItemVM in diagramViewModel.Items.OfType<SettingsDesignerItemViewModel>())
@@ -383,6 +395,13 @@ namespace DemoApp
                     SettingsDesignerItemViewModel settingsDesignerItemViewModel =
                         new SettingsDesignerItemViewModel(settingsDesignerItem.Id, diagramViewModel, settingsDesignerItem.Left, settingsDesignerItem.Top, settingsDesignerItem.ItemWidth, settingsDesignerItem.ItemHeight, settingsDesignerItem.Setting1);
                     diagramViewModel.Items.Add(settingsDesignerItemViewModel);
+                }
+                if (diagramItemData.ItemType == typeof(UvvDesignerItem))
+                {
+                    UvvDesignerItem uvvDesignerItem = databaseAccessService.FetchUvvDesignerItem(diagramItemData.ItemId);
+                    UvvDesignerItemViewModel uvvDesignerItemViewModel =
+                        new UvvDesignerItemViewModel(uvvDesignerItem.Id, diagramViewModel, uvvDesignerItem.Left, uvvDesignerItem.Top, uvvDesignerItem.ItemWidth, uvvDesignerItem.ItemHeight, uvvDesignerItem.Setting1);
+                    diagramViewModel.Items.Add(uvvDesignerItemViewModel);
                 }
                 if (diagramItemData.ItemType == typeof(GroupDesignerItem))
                 {
@@ -554,11 +573,14 @@ namespace DemoApp
                 return typeof(SettingsDesignerItem);
             if (vmType is GroupingDesignerItemViewModel)
                 return typeof(GroupDesignerItem);
-            
+            if (vmType is UvvDesignerItemViewModel)
+                return typeof(UvvDesignerItem);
+
 
             throw new InvalidOperationException(string.Format("Unknown diagram type. Currently only {0} and {1} are supported",
                 typeof(PersistDesignerItem).AssemblyQualifiedName,
-                typeof(SettingsDesignerItemViewModel).AssemblyQualifiedName
+                typeof(SettingsDesignerItemViewModel).AssemblyQualifiedName,
+                typeof(UvvDesignerItemViewModel).AssemblyQualifiedName
                 ));
 
         }
@@ -579,6 +601,10 @@ namespace DemoApp
             if (connectorDataItemType == typeof(GroupDesignerItem))
             {
                 dataItem = diagramViewModel.Items.OfType<GroupingDesignerItemViewModel>().Single(x => x.Id == conectorDataItemId);
+            }
+            if (connectorDataItemType == typeof(UvvDesignerItem))
+            {
+                dataItem = diagramViewModel.Items.OfType<UvvDesignerItemViewModel>().Single(x => x.Id == conectorDataItemId);
             }
             return dataItem;
         }
@@ -649,6 +675,12 @@ namespace DemoApp
                 DiagramItemData diagramItemToRemoveFromParent = wholeDiagramToAdjust.DesignerItems.Where(x => x.ItemId == itemToDelete.Id && x.ItemType == typeof(SettingsDesignerItem)).Single();
                 wholeDiagramToAdjust.DesignerItems.Remove(diagramItemToRemoveFromParent);
                 databaseAccessService.DeleteSettingDesignerItem(itemToDelete.Id);
+            }
+            if (itemToDelete is UvvDesignerItemViewModel)
+            {
+                DiagramItemData diagramItemToRemoveFromParent = wholeDiagramToAdjust.DesignerItems.Where(x => x.ItemId == itemToDelete.Id && x.ItemType == typeof(UvvDesignerItem)).Single();
+                wholeDiagramToAdjust.DesignerItems.Remove(diagramItemToRemoveFromParent);
+                databaseAccessService.DeletePersistDesignerItem(itemToDelete.Id);
             }
             if (itemToDelete is ConnectorViewModel)
             {

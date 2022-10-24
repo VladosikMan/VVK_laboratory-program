@@ -14,6 +14,8 @@ namespace DemoApp.Persistence.Common
 
 		public List<GroupDesignerItem> GroupDesignerItem { get; set; }
 
+		public List<UvvDesignerItem> UvvDesignerItem { get; set; }
+
 		public Diagram()
 		{
 			DiagramItem = new DiagramItem();
@@ -21,6 +23,7 @@ namespace DemoApp.Persistence.Common
 			PersistDesignerItem = new List<PersistDesignerItem>();
 			SettingsDesignerItem = new List<SettingsDesignerItem>();
 			GroupDesignerItem = new List<GroupDesignerItem>();
+			UvvDesignerItem = new List<UvvDesignerItem>();
 		}
 
 		public override bool Equals(object obj)

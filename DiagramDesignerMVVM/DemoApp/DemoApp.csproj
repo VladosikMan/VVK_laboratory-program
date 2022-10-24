@@ -87,6 +87,8 @@
       <DependentUpon>ToolBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\GroupingDesignerItemViewModel.cs" />
+    <Compile Include="ViewModels\UvvDesignerItemData.cs" />
+    <Compile Include="ViewModels\UvvDesignerItemViewModel.cs" />
     <Compile Include="ViewModels\ToolBoxViewModel.cs" />
     <Compile Include="ViewModels\SettingsDesignerItemData.cs" />
     <Compile Include="ViewModels\ISupportDataChanges.cs" />
@@ -161,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\DesignerItems\UvvDesignerItemDateTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,6 +189,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Memory.png" />
+    <Resource Include="Images\Processor.png" />
+    <Resource Include="Images\UVV.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

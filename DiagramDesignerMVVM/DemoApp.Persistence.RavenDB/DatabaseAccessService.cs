@@ -120,5 +120,17 @@ namespace DemoApp.Persistence.RavenDB
 		{
 			return DiagramToSave.GroupDesignerItem.Find(x => x.Id.Equals(itemId));
 		}
+
+		public int SaveUvvDesignerItem(UvvDesignerItem uvvDesignerItemToSave)
+		{
+			DiagramToSave.UvvDesignerItem.Add(uvvDesignerItemToSave);
+
+			return uvvDesignerItemToSave.Id;
+		}
+
+		public UvvDesignerItem FetchUvvDesignerItem(int uvvDesignerItemId)
+		{
+			return DiagramToSave.UvvDesignerItem.Find(x => x.Id.Equals(uvvDesignerItemId));
+		}
 	}
 }

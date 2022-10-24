@@ -19,6 +19,7 @@ namespace DemoApp.Persistence.Common
         int SavePersistDesignerItem(PersistDesignerItem persistDesignerItemToSave);
         //SettingsDesignerItem is pecific to the DemoApp example
         int SaveSettingDesignerItem(SettingsDesignerItem settingsDesignerItemToSave);
+        int SaveUvvDesignerItem(UvvDesignerItem uvvDesignerItemToSave);
         int SaveConnection(Connection connectionToSave);
         int SaveGroupingDesignerItem(GroupDesignerItem groupDesignerItem);
 
@@ -30,6 +31,7 @@ namespace DemoApp.Persistence.Common
         PersistDesignerItem FetchPersistDesignerItem(int settingsDesignerItemId);
         //SettingsDesignerItem is pecific to the DemoApp example
         SettingsDesignerItem FetchSettingsDesignerItem(int settingsDesignerItemId);
+        UvvDesignerItem FetchUvvDesignerItem(int uvvDesignerItemId);
         Connection FetchConnection(int connectionId);
         GroupDesignerItem FetchGroupingDesignerItem(int itemId);
     }
