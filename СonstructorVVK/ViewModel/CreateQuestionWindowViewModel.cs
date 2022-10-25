@@ -5,9 +5,14 @@ using СonstructorVVK.View;
 
 namespace СonstructorVVK.ViewModel
 {
-    class MainWindowViewModel
+    class CreateQuestionWindowViewModel
     {
-        public IMainWindowsCodeBehind CodeBehind { get; set; }
+        public string DisplayedImagePath
+        {
+            get { return @"C:\Users\1\git\VVK_laboratory-program\СonstructorVVK\recources\images\logo.png"; }
+        }
+
+        public ICreateQuestionWindowsCodeBehind CodeBehind { get; set; }
 
         private RelayCommand _LoadCreateQuestionUCCommand;
         public RelayCommand LoadCreateQuestionUCCommand

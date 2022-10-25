@@ -5,7 +5,7 @@ using СonstructorVVK.View;
 
 namespace СonstructorVVK
 {
-    public interface IMainWindowsCodeBehind
+    public interface ICreateQuestionWindowsCodeBehind
     {
         /// <summary>
         /// Загрузка нужной View
@@ -13,6 +13,5 @@ namespace СonstructorVVK
         /// <param name="view">экземпляр UserControl</param>
         void LoadView(ViewType typeView);
     }
-
 
 }

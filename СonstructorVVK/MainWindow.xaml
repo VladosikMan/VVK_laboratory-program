@@ -40,7 +40,7 @@
             <ToggleButton  Margin="5" Command="{Binding LoadSettingsUCCommand}">
                 <Image Source="recources/images/save_icon.png" Margin="5"/>
             </ToggleButton>
-            <ToggleButton  Margin="5">
+            <ToggleButton  Margin="5" Command="{Binding LoadCreateQuestionUCCommand}">
                 <Image Source="recources/images/play_icon.png" Margin="5"/>
             </ToggleButton>
             <ToggleButton  Margin="5">

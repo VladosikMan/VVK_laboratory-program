@@ -17,14 +17,44 @@ namespace СonstructorVVK.View
     /// <summary>
     /// Логика взаимодействия для CreateQuestionView.xaml
     /// </summary>
-    public partial class CreateQuestionView : UserControl
+    public partial class CreateQuestionView : UserControl, ICreateQuestionWindowsCodeBehind
     {
-        private CreateQuestionViewModel createQuestionViewModel;
+        private CreateQuestionWindowViewModel createQuestionVM;
+     
+        //   private CreateQuestionViewModel createQuestionViewModel;
         public CreateQuestionView()
         {
             InitializeComponent();
-            createQuestionViewModel = new CreateQuestionViewModel();
-            this.DataContext = createQuestionViewModel;
+            
+            // this.DataContext += CreateQuestionWindow_Loaded;
+           // createQuestionViewModel = new CreateQuestionViewModel();
+            this.Loaded += CreateQuestionWindow_Loaded;
+        }
+        private void CreateQuestionWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            createQuestionVM = new CreateQuestionWindowViewModel();
+            createQuestionVM.CodeBehind = this;
+            this.DataContext = createQuestionVM;
+            LoadView(ViewType.Settings);
+        }
+        public void LoadView(ViewType typeView)
+        {
+            switch (typeView)
+            {
+                case ViewType.Main:
+                    MainView view = new MainView();
+                    this.OutputView.Content = view;
+                    break;
+                case ViewType.Settings:
+                    SettingsView viewF = new SettingsView();
+                    this.OutputView.Content = viewF;
+                    break;
+                case ViewType.CreateQuestion:
+                    CreateQuestionView viewC = new CreateQuestionView();
+                    this.OutputView.Content = viewC;
+                    break;
+            }
+
         }
     }
 }

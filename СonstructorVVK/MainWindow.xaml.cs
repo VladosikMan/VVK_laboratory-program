@@ -28,7 +28,7 @@ namespace СonstructorVVK
             mainVM = new MainWindowViewModel();
             mainVM.CodeBehind = this;
             this.DataContext = mainVM;
-            LoadView(ViewType.CreateQuestion);
+            LoadView(ViewType.Main);
         }
         public void LoadView(ViewType typeView)
         {
