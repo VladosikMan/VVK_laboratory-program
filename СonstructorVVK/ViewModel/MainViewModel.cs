@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using СonstructorVVK.recources;
 using СonstructorVVK.View;
@@ -18,26 +19,49 @@ namespace СonstructorVVK.ViewModel
         public ObservableCollection<Lab> Labs { get; set; }
 
 
-        private Lab selectedLab;
-        public Lab SelectedLab
+        private Lab selectedItem;
+
+        public Lab SelectedItem
         {
-            get { return selectedLab; }
+            get { return selectedItem; }
             set
             {
-                selectedLab = value;
-              
+                selectedItem = value;
+                OnPropertyChanged();
             }
         }
+
+        private Subject selectedSub;
+
+        public Subject SelectedSub
+        {
+            get { return selectedSub; }
+            set
+            {
+                selectedSub = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Question selectedQue;
+
+        public Question SelectedQue
+        {
+            get { return selectedQue; }
+            set
+            {
+                selectedQue = value;
+                OnPropertyChanged();
+            }
+              
+        }
+
         public MainViewModel()
         {
             Labs = new ObservableCollection<Lab>();
-            loadAllLab();
+            var lab = new Lab("Первая лаба", 80);
 
-            /*Labs = new ObservableCollection<Lab>();
-
-            var lab = new Lab("Третья лаба", 80);
-            lab.Id = 3;
-            var questions = new List<Question>()
+            var questions = new ObservableCollection<Question>()
             {
                 new TextQuestion("Сколько стоит слон?", "10 рублей", 5),
                 new ChoiceQuestion("Кто живет в Африке?", new List<string>()
@@ -65,22 +89,24 @@ namespace СonstructorVVK.ViewModel
             var task2 = new TaskQuestion("Задача, посчитайте d = c + 5", 20, "d = c + 5");
             task2.SetSharedScope(scope);
 
-            questions = new List<Question>()
+            questions = new ObservableCollection<Question>()
             {
                 task,
                 task2
             };
             lab.AddSubject("Задачи от Жака Фреско", questions);
             lab.AddSharedScope(scope);
-
-            saveLab(lab);
-*/
-
-
+            Labs.Add(lab);
+            // loadAllLab();
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
 
 
         //Fields
@@ -118,5 +144,135 @@ namespace СonstructorVVK.ViewModel
             var lab = new Lab("TextNameLab" + Labs.Count, 80, Labs.Count);
             Labs.Add(lab);
         }
+
+
+
+        //  Обработка команд
+
+        private RelayCommand<Lab> removeLab;
+        public RelayCommand<Lab> RemoveLab
+        {
+            get
+            {
+                return removeLab ??
+                  (removeLab = new RelayCommand<Lab>(lab =>
+                  {
+           
+                      if (lab != null)
+                      {
+                          Labs.Remove(lab);
+                      }
+                  },
+                 (lab) => Labs.Count > 0));
+            }
+        }
+        private void RemoveFunc(Lab lab)
+        {
+            Labs.Remove(lab);
+        }
+
+        // команда добавления новой лабораторной
+        private RelayCommand<Lab> addLab;
+        public RelayCommand<Lab> AddLab
+        {
+            get
+            {
+                return addLab ??
+                  (addLab = new RelayCommand<Lab>(obj =>
+                  {
+                      Lab newLab = new Lab("SFDFsd", 23);
+                      Labs.Add(newLab);
+                  }));
+            }
+        }
+
+        private RelayCommand<Lab> addSubject;
+        public RelayCommand<Lab> AddSubject
+        {
+            get
+            {
+                return addSubject ??
+                  (addSubject = new RelayCommand<Lab>(lab =>
+                  {
+
+                      lab.AddSubject("Titke", null);
+
+
+                  }));
+            }
+        }
+
+        private RelayCommand<Subject> removeSubject;
+        public RelayCommand<Subject> RemoveSubject
+        {
+            get
+            {
+                return removeSubject ??
+                  (removeSubject = new RelayCommand<Subject>(subject =>
+                  {
+                      if (subject != null)
+                      {
+                          SelectedItem.Subjects.Remove(subject);
+                      }
+                  },
+                 (subject) => Labs.Count > 0));
+            }
+        }
+
+
+        private RelayCommand<Subject> addQuestion;
+        public RelayCommand<Subject> AddQuestion
+        {
+            get
+            {
+                return addQuestion ??
+                  (addQuestion = new RelayCommand<Subject>(subject =>
+                  {
+                      if (subject != null)
+                      {
+                          TextQuestion question = new TextQuestion("Вопросики", "De", 11);
+                          subject.Questions.Add(question);
+                      }
+                  },
+                 (question) => Labs.Count > 0));
+            }
+        }
+
+        private RelayCommand<Question> removeQuestion;
+        public RelayCommand<Question> RemoveQuestion
+        {
+            get
+            {
+                return removeQuestion ??
+                  (removeQuestion = new RelayCommand<Question>(question =>
+                  {
+                      if (question != null)
+                      {
+                          SelectedSub.Questions.Remove(question);
+                      }
+                  },
+                 (question) => Labs.Count > 0));
+            }
+        }
+
+
+        private RelayCommand _LoadMainUCCommand;
+        public RelayCommand LoadMainUCCommand
+        {
+            get
+            {
+                return _LoadMainUCCommand = _LoadMainUCCommand ??
+                  new RelayCommand(OnLoadMainUC, CanLoadMainUC);
+            }
+        }
+        private bool CanLoadMainUC()
+        {
+            return true;
+        }
+        private void OnLoadMainUC()
+        {
+            _MainCodeBehind.LoadView(ViewType.Settings);
+        }
+
     }
 }

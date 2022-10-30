@@ -3,34 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:СonstructorVVK.View"
+             xmlns:local="clr-namespace:СonstructorVVK.View" xmlns:e="http://schemas.microsoft.com/xaml/behaviors" xmlns:behaviours="clr-namespace:СonstructorVVK" xmlns:viewmodel="clr-namespace:СonstructorVVK.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:SettingsViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-
     <UserControl.Resources>
+        
         <DataTemplate x:Key="questionsTemplate">
-            <!-- здесь можно делать шаблон вопроса !-->
             <StackPanel Orientation="Horizontal" Height="30">
-                <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding Id}" VerticalAlignment="Center"/>
+
                 <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding Text}" Margin="10 0 0 0 " VerticalAlignment="Center" />
-                <ToggleButton   Content="-" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0  " />
+                <ToggleButton  Command="{Binding ElementName=MainTreeView, Path=DataContext.RemoveQuestion,UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=MainTreeView, Path=DataContext.SelectedQue}"  Content="-" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0  " />
                 <ToggleButton  Height="25" Width="25" Margin="5 0 0 0  " >
                     <Image Source="../recources/images/settings.png" />
                 </ToggleButton>
+
                 <CheckBox  Margin="5 0 0 0 "  VerticalAlignment="Center"/>
             </StackPanel>
         </DataTemplate>
 
-        <HierarchicalDataTemplate x:Key="sybjectsTemplate"   ItemTemplate="{StaticResource questionsTemplate}"
-                                ItemsSource="{Binding Questions}"
-                                  >
-            <!-- здесь можно делать шаблон темы !-->
+        <HierarchicalDataTemplate  x:Key="subjectTemplate" 
+                                ItemTemplate="{StaticResource questionsTemplate}"
+                                  ItemsSource="{Binding Questions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <StackPanel Orientation="Horizontal" Height="30">
-                <TextBlock FontSize="16" FontWeight="Bold" Text="{Binding Id}" VerticalAlignment="Center"/>
-                <TextBlock FontSize="16" FontWeight="Bold" Text="{Binding Title}" Margin="10 0 0 0 " VerticalAlignment="Center" />
-                <ToggleButton  Content="+" VerticalContentAlignment="Center"  FontSize="16" Height="25" Width="25" Margin="5 0 0 0 "/>
-                <ToggleButton   Content="-" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0  " />
+                <TextBlock FontSize="16" FontWeight="Bold" Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 0 0 " VerticalAlignment="Center" />
+                <ToggleButton  Command="{Binding ElementName=MainTreeView, Path=DataContext.AddQuestion, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=MainTreeView, Path=DataContext.SelectedSub}" Content="+" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0 "/>
+                <ToggleButton  Command="{Binding ElementName=MainTreeView, Path=DataContext.RemoveSubject,UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=MainTreeView, Path=DataContext.SelectedSub}"  Content="-" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0  " />
                 <ToggleButton  Height="25" Width="25" Margin="5 0 0 0  " >
                     <Image Source="../recources/images/settings.png" />
                 </ToggleButton>
@@ -38,27 +36,46 @@
             </StackPanel>
 
         </HierarchicalDataTemplate>
-
-        <HierarchicalDataTemplate x:Key="labsTemplate" ItemTemplate="{StaticResource sybjectsTemplate}"
-                                  ItemsSource="{Binding Subjects}"
-                                  >
-            <!-- здесь можно делать шаблон лабы !-->
-            <StackPanel Orientation="Horizontal" Height="30">
-                <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding Id}" VerticalAlignment="Center"/>
-                <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding Name}" Margin="10 0 0 0 " VerticalAlignment="Center" />
-                <ToggleButton  Content="+" VerticalContentAlignment="Center"  FontSize="16" Height="25" Width="25" Margin="5 0 0 0 "/>
-                <ToggleButton   Content="-" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0  " />
+        
+        <HierarchicalDataTemplate 
+                                x:Key="labsTemplate" 
+                                 ItemsSource="{Binding Subjects, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                ItemTemplate="{StaticResource subjectTemplate}"
+                       >
+            <StackPanel Orientation="Horizontal" Height="30" >
+                <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding Name,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 0 0 " VerticalAlignment="Center" />
+                <ToggleButton  Command="{Binding ElementName=MainTreeView, Path=DataContext.AddSubject, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=MainTreeView, Path=DataContext.SelectedItem}"  Content="+" VerticalContentAlignment="Center"  FontSize="16" Height="25" Width="25" Margin="5 0 0 0 "/>
+                <ToggleButton  Command="{Binding ElementName=MainTreeView, Path=DataContext.RemoveLab,UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=MainTreeView, Path=DataContext.SelectedItem}"  Content="-" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0  " />
                 <ToggleButton  Height="25" Width="25" Margin="5 0 0 0  " >
                     <Image Source="../recources/images/settings.png" />
                 </ToggleButton>
+
                 <CheckBox  Margin="5 0 0 0 "  VerticalAlignment="Center"/>
             </StackPanel>
-           
+
         </HierarchicalDataTemplate>
+
     </UserControl.Resources>
-    <Grid>
-        <TreeView ItemTemplate="{StaticResource labsTemplate }"    
-          ItemsSource="{Binding Labs}"  Margin="30 10 30 10 "/>
-    </Grid>
     
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.08*" />
+            <RowDefinition Height="0.08*" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+         <TreeView  Grid.Row="2"
+          ItemsSource="{Binding Labs, Mode=TwoWay}"  Margin="30 10 30 10 "         
+              x:Name="MainTreeView"
+              ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                 ItemTemplate="{StaticResource labsTemplate}"     
+          >
+            <e:Interaction.Behaviors>
+                <behaviours:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                <behaviours:BindableSelectedItemBehavior SelectedItem="{Binding SelectedSub, Mode=TwoWay}" />
+                <behaviours:BindableSelectedItemBehavior SelectedItem="{Binding SelectedQue, Mode=TwoWay}" />
+            </e:Interaction.Behaviors>
+
+        </TreeView>
+    </Grid>
+
 </UserControl>

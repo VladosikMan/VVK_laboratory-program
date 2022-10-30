@@ -30,6 +30,7 @@ namespace СonstructorVVK.View
             this.DataContext = mainViewModel;
            
         }
+
     }
    
 }
