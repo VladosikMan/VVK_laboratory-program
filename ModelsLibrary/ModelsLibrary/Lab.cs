@@ -3,6 +3,7 @@ using ModelsLibrary.Questions.Scope;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -24,7 +25,7 @@ namespace ModelsLibrary
         private int SuccessPercent { get; set; }
 
         [JsonProperty]
-        public List<Subject> Subjects { get; set; }
+        public ObservableCollection<Subject> Subjects { get; set; }
 
         [JsonProperty]
         private List<SharedScope> SharedScopes { get; set; }
@@ -54,7 +55,7 @@ namespace ModelsLibrary
 
         public Lab()
         {
-            Subjects = new List<Subject>();
+            Subjects = new ObservableCollection<Subject>();
             SharedScopes = new List<SharedScope>();
         }
 
@@ -71,23 +72,23 @@ namespace ModelsLibrary
         }
 
 
-        public List<Question> GetQuestionsBySubject(string subjectTitle)
+        public ObservableCollection<Question> GetQuestionsBySubject(string subjectTitle)
         {
             var subject = Subjects.FirstOrDefault(x => x.Title == subjectTitle);
 
             if (subject == null)
             {
-                return new List<Question>();
+                return new ObservableCollection<Question>();
             }
 
             return subject.Questions;
         }
 
-        public void AddSubject(string title, List<Question> questions = null)
+        public void AddSubject(string title, ObservableCollection<Question> questions = null)
         {
             if (questions == null)
             {
-                questions = new List<Question>();
+                questions = new ObservableCollection<Question>();
             }
 
             Subjects.Add(new Subject(title)
