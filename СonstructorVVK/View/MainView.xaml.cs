@@ -19,7 +19,7 @@ namespace СonstructorVVK.View
     /// Логика взаимодействия для MainView.xaml
     /// </summary>
 
-    public partial class MainView : UserControl
+    public partial class MainView : UserControl, IMainWindowsCodeBehind
     {
        
         private MainViewModel mainViewModel;
@@ -28,9 +28,35 @@ namespace СonstructorVVK.View
             InitializeComponent();
             mainViewModel = new MainViewModel();
             this.DataContext = mainViewModel;
-           
+            mainViewModel.CodeBehind = this;
+            SharedScopeView sharedScopeView = new SharedScopeView();
+            this.OutputSharedScopeView.Content = sharedScopeView;
         }
 
+        public void LoadView(ViewType typeView)
+        {
+            switch (typeView)
+            {
+                case ViewType.SettingsLab:
+
+                    SettingsLabView view = new SettingsLabView();
+                    this.OutputSettingView.Content = view;
+                    view.SetLab(mainViewModel.SelectedItem);
+                    break;
+                case ViewType.SettingsSubject:
+
+                    SettingsSubjectView viewF = new SettingsSubjectView();
+                    this.OutputSettingView.Content = viewF;
+                    viewF.SetSubject(mainViewModel.SelectedSub);
+                    break;
+                case ViewType.SettingsQuestion:
+
+                    SettingsQuestionView viewC = new SettingsQuestionView();
+                    this.OutputSettingView.Content = viewC;
+                    viewC.SetQuestion(mainViewModel.SelectedQue);
+                    break;
+            }
+        }
     }
    
 }

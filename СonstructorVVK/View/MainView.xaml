@@ -14,11 +14,7 @@
 
                 <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding Text}" Margin="10 0 0 0 " VerticalAlignment="Center" />
                 <ToggleButton  Command="{Binding ElementName=MainTreeView, Path=DataContext.RemoveQuestion,UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=MainTreeView, Path=DataContext.SelectedQue}"  Content="-" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0  " />
-                <ToggleButton  Height="25" Width="25" Margin="5 0 0 0  " >
-                    <Image Source="../recources/images/settings.png" />
-                </ToggleButton>
-
-                <CheckBox  Margin="5 0 0 0 "  VerticalAlignment="Center"/>
+             <CheckBox  Margin="5 0 0 0 "  VerticalAlignment="Center"/>
             </StackPanel>
         </DataTemplate>
 
@@ -29,9 +25,6 @@
                 <TextBlock FontSize="16" FontWeight="Bold" Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 0 0 " VerticalAlignment="Center" />
                 <ToggleButton  Command="{Binding ElementName=MainTreeView, Path=DataContext.AddQuestion, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=MainTreeView, Path=DataContext.SelectedSub}" Content="+" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0 "/>
                 <ToggleButton  Command="{Binding ElementName=MainTreeView, Path=DataContext.RemoveSubject,UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=MainTreeView, Path=DataContext.SelectedSub}"  Content="-" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0  " />
-                <ToggleButton  Height="25" Width="25" Margin="5 0 0 0  " >
-                    <Image Source="../recources/images/settings.png" />
-                </ToggleButton>
                 <CheckBox  Margin="5 0 0 0 "  VerticalAlignment="Center"/>
             </StackPanel>
 
@@ -41,15 +34,12 @@
                                 x:Key="labsTemplate" 
                                  ItemsSource="{Binding Subjects, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ItemTemplate="{StaticResource subjectTemplate}"
+                               
                        >
             <StackPanel Orientation="Horizontal" Height="30" >
-                <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding Name,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 0 0 " VerticalAlignment="Center" />
+                <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding Name,  Mode=TwoWay}" Margin="10 0 0 0 " VerticalAlignment="Center" />
                 <ToggleButton  Command="{Binding ElementName=MainTreeView, Path=DataContext.AddSubject, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=MainTreeView, Path=DataContext.SelectedItem}"  Content="+" VerticalContentAlignment="Center"  FontSize="16" Height="25" Width="25" Margin="5 0 0 0 "/>
                 <ToggleButton  Command="{Binding ElementName=MainTreeView, Path=DataContext.RemoveLab,UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=MainTreeView, Path=DataContext.SelectedItem}"  Content="-" VerticalContentAlignment="Center"   FontSize="16" Height="25" Width="25" Margin="5 0 0 0  " />
-                <ToggleButton  Height="25" Width="25" Margin="5 0 0 0  " >
-                    <Image Source="../recources/images/settings.png" />
-                </ToggleButton>
-
                 <CheckBox  Margin="5 0 0 0 "  VerticalAlignment="Center"/>
             </StackPanel>
 
@@ -58,24 +48,45 @@
     </UserControl.Resources>
     
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.8*"/> 
+            <ColumnDefinition Width="*"/> 
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.08*" />
             <RowDefinition Height="0.08*" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-         <TreeView  Grid.Row="2"
+        <ToggleButton Grid.Row="0" Grid.ColumnSpan="2" Command="{Binding AddLab, UpdateSourceTrigger=PropertyChanged}"  Content="+" HorizontalAlignment="Left"  FontSize="16" Height="25" Width="25" Margin="30 0 0 0 "/>
+
+        <TreeView  Grid.Row="1" Grid.Column="0"
           ItemsSource="{Binding Labs, Mode=TwoWay}"  Margin="30 10 30 10 "         
               x:Name="MainTreeView"
               ScrollViewer.VerticalScrollBarVisibility="Auto" 
                  ItemTemplate="{StaticResource labsTemplate}"     
+                   
           >
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                </Style>
+            </TreeView.ItemContainerStyle>
             <e:Interaction.Behaviors>
                 <behaviours:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
                 <behaviours:BindableSelectedItemBehavior SelectedItem="{Binding SelectedSub, Mode=TwoWay}" />
                 <behaviours:BindableSelectedItemBehavior SelectedItem="{Binding SelectedQue, Mode=TwoWay}" />
             </e:Interaction.Behaviors>
-
+            
         </TreeView>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ContentPresenter Grid.Row="0"  x:Name="OutputSettingView"  />
+            <ContentPresenter Grid.Row="1"  x:Name="OutputSharedScopeView"  />
+        </Grid>
+       
+   
     </Grid>
 
 </UserControl>

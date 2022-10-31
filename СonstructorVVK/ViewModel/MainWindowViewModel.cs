@@ -9,6 +9,7 @@ namespace СonstructorVVK.ViewModel
     {
         public IMainWindowsCodeBehind CodeBehind { get; set; }
 
+
         private RelayCommand _LoadCreateQuestionUCCommand;
         public RelayCommand LoadCreateQuestionUCCommand
         {

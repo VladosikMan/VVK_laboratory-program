@@ -15,7 +15,29 @@ namespace СonstructorVVK.ViewModel
 {
    public  class MainViewModel : INotifyPropertyChanged
     {
-     
+        public IMainWindowsCodeBehind CodeBehind { get; set; }
+
+
+        // загрузка content для настроек
+        private RelayCommand loadSettingLabView;
+        public RelayCommand LoadSettingLabView
+        {
+            get
+           {
+                return loadSettingLabView = loadSettingLabView ??
+                  new RelayCommand(OnLoadSettingsLabView, CanLoadSettingsLabView);
+            }
+        }
+        private bool CanLoadSettingsLabView()
+        {
+            return true;
+        }
+        private void OnLoadSettingsLabView()
+        {
+            selectedItem.Name = "New Name";
+            CodeBehind.LoadView(ViewType.SettingsLab);
+        }
+
         public ObservableCollection<Lab> Labs { get; set; }
 
 
@@ -28,6 +50,8 @@ namespace СonstructorVVK.ViewModel
             {
                 selectedItem = value;
                 OnPropertyChanged();
+                // загрузить настройки
+                CodeBehind.LoadView(ViewType.SettingsLab);
             }
         }
 
@@ -40,6 +64,7 @@ namespace СonstructorVVK.ViewModel
             {
                 selectedSub = value;
                 OnPropertyChanged();
+                CodeBehind.LoadView(ViewType.SettingsSubject);
             }
         }
 
@@ -52,6 +77,7 @@ namespace СonstructorVVK.ViewModel
             {
                 selectedQue = value;
                 OnPropertyChanged();
+                CodeBehind.LoadView(ViewType.SettingsQuestion);
             }
               
         }
@@ -59,7 +85,7 @@ namespace СonstructorVVK.ViewModel
         public MainViewModel()
         {
             Labs = new ObservableCollection<Lab>();
-            var lab = new Lab("Первая лаба", 80);
+            var lab = new Lab("Первая лаба",  2);
 
             var questions = new ObservableCollection<Question>()
             {
@@ -99,7 +125,7 @@ namespace СonstructorVVK.ViewModel
             Labs.Add(lab);
             // loadAllLab();
         }
-
+    
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -141,7 +167,7 @@ namespace СonstructorVVK.ViewModel
         }
         public void createLab()
         {
-            var lab = new Lab("TextNameLab" + Labs.Count, 80, Labs.Count);
+            var lab = new Lab("TextNameLab" + Labs.Count,  Labs.Count);
             Labs.Add(lab);
         }
 

@@ -9,5 +9,9 @@ namespace СonstructorVVK.View
         Main,
         Settings,
         CreateQuestion,
+        SettingsLab,
+        SettingsSubject,
+        SettingsQuestion,
+
     }
 }
