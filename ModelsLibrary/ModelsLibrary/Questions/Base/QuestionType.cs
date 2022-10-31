@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ModelsLibrary.Questions
 {
@@ -20,6 +16,6 @@ namespace ModelsLibrary.Questions
         [Display(Name = "Вопрос с сортировкой ответ")]
         SequenceQuestion,
         [Display(Name = "Задача")]
-        TaskQuestion
+        TaskQuestion,
     }
 }

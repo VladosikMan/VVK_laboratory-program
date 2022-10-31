@@ -12,7 +12,7 @@ namespace ModelsLibrary.Questions
 
         public List<string> AnswerChoices { get; set; }
 
-        public ChoiceQuestion(string text, List<string> suggested, List<string> answers, double rate) 
+        public ChoiceQuestion(string text, List<string> suggested, List<string> answers, double rate)
             : base(text, rate)
         {
             Type = QuestionType.ChoiceQuestion;
@@ -30,7 +30,7 @@ namespace ModelsLibrary.Questions
         public double GetRate(ChoiceQuestion question)
         {
             var correctCount = 0;
-            
+
             foreach (var answer in question.AnswerChoices)
             {
                 if (AnswerChoices.Contains(answer))
@@ -41,5 +41,7 @@ namespace ModelsLibrary.Questions
 
             return Math.Round(Rate / correctCount, 1);
         }
+
+       
     }
 }
