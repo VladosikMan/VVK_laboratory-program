@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32602.291
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp2", "WpfApp2.csproj", "{B5376F75-8F62-492F-9096-324E0DA7AB5E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfMath", "..\WpfApp1\src\WpfMath\WpfMath.csproj", "{6BAD2007-6469-439D-910D-077280CC1DEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5376F75-8F62-492F-9096-324E0DA7AB5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5376F75-8F62-492F-9096-324E0DA7AB5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5376F75-8F62-492F-9096-324E0DA7AB5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5376F75-8F62-492F-9096-324E0DA7AB5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BAD2007-6469-439D-910D-077280CC1DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BAD2007-6469-439D-910D-077280CC1DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BAD2007-6469-439D-910D-077280CC1DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BAD2007-6469-439D-910D-077280CC1DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CFA95F95-4F55-4EEA-9FD1-1C49A7AFAC20}
+	EndGlobalSection
+EndGlobal
