@@ -1,13 +1,16 @@
 ﻿
+using ModelsLibrary.Extensions;
 using ModelsLibrary.Questions.Scope;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ModelsLibrary.Questions
 {
-    public abstract class Question : IQuestion<Question>, ISharedScoped
+    public abstract class Question : IQuestion<Question>, ISharedScoped, INotifyPropertyChanged
     {
         protected SharedScope mSharedScope;
         public SharedScope SharedScope
@@ -20,10 +23,35 @@ namespace ModelsLibrary.Questions
         /// </summary>
         public QuestionType Type { get; set; }
 
+        private string typeName { get; set; }
+        public string TypeName
+        {
+            get
+            {
+                return EnumExtensions.GetDisplayName(Type);
+            }
+            set
+            {
+                typeName = value ;
+                OnPropertyChanged();
+            }
+
+        }
         /// <summary>
         /// Текст.
         /// </summary>
-        public string Text { get; set; }
+        private string text;
+        public string Text {
+            get
+            {
+                return text;
+            }
+            set
+            {
+                text = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Картинка в байтах.
@@ -33,7 +61,18 @@ namespace ModelsLibrary.Questions
         /// <summary>
         /// "Вес" вопроса.
         /// </summary>
-        public double Rate { get; set; }
+        private double rate;
+        public double Rate {
+            get
+            {
+                return rate;
+            }
+            set
+            {
+                rate = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Получение клиентской версии вопроса.
@@ -66,12 +105,17 @@ namespace ModelsLibrary.Questions
             mSharedScope = sharedScope;
         }
 
-      
-
         public Question(string text, double rate)
         {
             Text = text;
             Rate = rate;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

@@ -4,25 +4,34 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ModelsLibrary
 {
     [Serializable]
-    public class Lab
+    public class Lab : INotifyPropertyChanged
     {
         public Lab(string json)
         {
             Deserialize(json);
         }
 
+        private string name;
+        public string Name { 
+            get
+            {
+                return name;
+            } set {
+                name = value;
+                OnPropertyChanged();
+            } 
+        }
 
-        public string Name { get; set; }
-        public int Id { get; set; }
-
-        [JsonProperty]
-        private int SuccessPercent { get; set; }
+        public int Id
+        { get; set; }
 
         [JsonProperty]
         public ObservableCollection<Subject> Subjects { get; set; }
@@ -30,6 +39,7 @@ namespace ModelsLibrary
         [JsonProperty]
         private List<SharedScope> SharedScopes { get; set; }
 
+     
 
         public string Serialize()
         {
@@ -59,15 +69,9 @@ namespace ModelsLibrary
             SharedScopes = new List<SharedScope>();
         }
 
-        public Lab(string name, int successPercent) : this()
+        public Lab(string name, int id) : this()
         {
             Name = name;
-            SuccessPercent = successPercent;
-        }
-        public Lab(string name, int successPercent, int id) : this()
-        {
-            Name = name;
-            SuccessPercent = successPercent;
             Id = id;
         }
 
@@ -100,6 +104,12 @@ namespace ModelsLibrary
         public void AddSharedScope(SharedScope scope)
         {
             SharedScopes.Add(scope);
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
