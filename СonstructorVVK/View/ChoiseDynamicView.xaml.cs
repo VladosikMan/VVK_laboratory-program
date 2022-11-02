@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,27 +10,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApplication1;
-using СonstructorVVK.ViewModel;
 
 namespace СonstructorVVK.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainView.xaml
+    /// Логика взаимодействия для ChoiseDynamicView.xaml
     /// </summary>
-
-    public partial class MainView : UserControl
+    public partial class ChoiseDynamicView : UserControl
     {
-       
-        private MainViewModel mainViewModel;
-        public MainView()
+        public ChoiseDynamicView()
         {
             InitializeComponent();
-            mainViewModel = new MainViewModel();
-            this.DataContext = mainViewModel;
-           
         }
     }
-   
 }
-   

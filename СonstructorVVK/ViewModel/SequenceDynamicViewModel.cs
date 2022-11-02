@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using WpfApplication1;
 
 namespace СonstructorVVK.ViewModel
 {
-    class CreateQuestionViewModel 
+    class SequenceDynamicViewModel : NotificationObject
     {
-        public CreateQuestionViewModel()
-        { 
-        }
+
+
 
     }
 }
