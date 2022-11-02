@@ -3,69 +3,94 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:СonstructorVVK.View"
+             xmlns:viewModels="clr-namespace:СonstructorVVK.ViewModel"
              xmlns:local="clr-namespace:СonstructorVVK.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    
-        <Grid>
-            
+
+
+    <Grid>
+
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="125*"/>
         </Grid.RowDefinitions>
+
         <!-- тут нужон основной интерфейс создания вопросов !-->
         <!-- т  <StackPanel DataContext="{Binding Question}">!-->
-        <Border BorderBrush="LightBlue" BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top" >
-            <StackPanel Orientation="Horizontal">
-                <ComboBox Name="QestionList" Height="20" Width="150"  Text="Типы вопросов" IsEditable="True" >
-                    <Button Content="Одиночный"   Width="150" Height="20" Background="Transparent"  BorderBrush="Transparent" BorderThickness="0" Command="{Binding LoadMainUCCommand}" />
-                    <Button Content="Выбор"   Width="150" Height="20" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Command="{Binding LoadSettingsUCCommand}"/>
-                    <Button Content="Сопоставление"   Width="150" Height="20" Background="Transparent"  BorderBrush="Transparent" BorderThickness="0" Command="{Binding LoadCreateQuestionUCCommand}" />
-                    <Button Content="Ответ"   Width="150" Height="20" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Command="{Binding LoadCreateQuestionUCCommand}" />
+
+
+        <!-- выбор типа вопроса !-->
+        <Border BorderBrush="LightBlue" BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Top" Margin="0,0,297,0" >
+            <StackPanel Orientation="Horizontal" Height="21" Margin="0,0,9,0">
+                <ComboBox Name="QestionList" Height="20" Width="150"  Text="Типы вопросов" IsEditable="True" StaysOpenOnEdit="True"  >
+                    <Button Content="Одиночный"   Width="150" Height="20" Background="Transparent"  BorderBrush="Transparent" BorderThickness="0" Command="{Binding LoadChoiseOneQuestionUCCommand}" />
+                    <Button Content="Выбор"   Width="150" Height="20" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Command="{Binding LoadChoiseQuestionUCCommand}"/>
+                    <Button Content="Сопоставление"   Width="150" Height="20" Background="Transparent"  BorderBrush="Transparent" BorderThickness="0" Command="{Binding LoadSequenceQuestionUCCommand}" />
+                    <Button Content="Ответ"   Width="150" Height="20" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Command="{Binding LoadTextQuestionUCCommand}" />
+                    <Button Content="Формула"   Width="150" Height="20" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"  />
+                    <Button Content="Схема"   Width="150" Height="20" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" />
                 </ComboBox>
                 <Button Content="Отменить"   Width="70" Height="20" />
                 <Button Content="Сохранить"  Width="70" Height="20" />
-            <!-- например меняем текст вопроса !-->
-            <!--<TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" /> -->
+                <!-- например меняем текст вопроса !-->
+                <!--<TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" /> -->
             </StackPanel>
         </Border>
 
-        <Border BorderBrush="LightBlue" BorderThickness="2" Grid.Row="1"  Grid.ColumnSpan="2" VerticalAlignment="Top">
+        <!-- текст вопроса !-->
+        <Border BorderBrush="LightBlue" BorderThickness="2" Grid.Row="1"  Grid.Column="0" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,0,7,0">
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="Текст вопроса:" FontSize="18" />
-                <RichTextBox VerticalAlignment="Top" Language="ru-ru"  VerticalScrollBarVisibility="Visible" />
+                <TextBlock  Text ="Текст вопроса:" FontSize="18"  />
+                <RichTextBox Language="ru-ru"  VerticalScrollBarVisibility="Visible" Height="95"/>
             </StackPanel>
         </Border>
 
-        <Border BorderBrush="LightBlue" BorderThickness="2"  Grid.Row="2"  Grid.ColumnSpan="2" VerticalAlignment="Top">
-            <StackPanel Orientation="Horizontal" >
-                <Image  Source="{Binding DisplayedImagePath}" HorizontalAlignment="Left" Margin="0,0,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Bottom" />
-                <Button Content="Загрузить изображение"  Width="150" Height="20" />
-                <Button Content="Открыть конструктор схем"  Width="170" Height="20" />
-                <Button Content="Открыть конструктор формул"  Width="170" Height="20" />
+        <GridSplitter Grid.Row="1" Grid.Column="1" ShowsPreview="False" Width="3"
+                      HorizontalAlignment="Center" Grid.RowSpan="2" />
+
+        <!-- изображение вопроса !-->
+        <Border BorderBrush="LightBlue" BorderThickness="2"  Grid.Row="1"  Grid.Column="2"  VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <Image  Source="{Binding Path=DisplayedImagePath}" HorizontalAlignment="Left" Margin="0,0,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Bottom" />
+                <Button Content="Загрузить изображение"  Width="150" Height="20"  Click="Button_Click" />
+                <!-- <Button Content="Открыть конструктор схем"  Width="170" Height="20" />
+                <Button Content="Открыть конструктор формул"  Width="170" Height="20" /> !-->
             </StackPanel>
         </Border>
 
-        <Border BorderBrush="LightBlue" BorderThickness="2"  Grid.Row="3"  Grid.ColumnSpan="1" VerticalAlignment="Top">
+
+
+        <!-- Question  Area !-->
+        <Border BorderBrush="LightBlue" BorderThickness="2"  Grid.Row="3"  Grid.Column="0" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,0,7,0">
+            <StackPanel Orientation="Horizontal">
+                <ContentPresenter x:Name="OutputView" />
+            </StackPanel>
+        </Border>
+
+
+        <GridSplitter Grid.Row="3" Grid.Column="1" ShowsPreview="False" Width="3"
+                      HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+        <!-- Shared Scope Area !-->
+        <Border BorderBrush="LightBlue" BorderThickness="2"  Grid.Row="3"  Grid.Column="2" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="ShareScope" FontSize="18" />
             </StackPanel>
         </Border>
 
-        <Border BorderBrush="LightBlue" BorderThickness="2"  Grid.Row="3"  Grid.Column="2" VerticalAlignment="Top">
-            <StackPanel Orientation="Horizontal">
-                 <ContentPresenter x:Name="OutputView" />
-            </StackPanel>
-        </Border>
 
 
+        <GridSplitter  Grid.Row="2"  Grid.Column="0" ShowsPreview="False" Height="3"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Center" />
         <!-- так как из combobox мы выбирает тип вопроса, то подгружаем разный интерфейс  
                 это можно сделать с помощью
                 <ContentPresenter " x:Name="OutputView" /> 

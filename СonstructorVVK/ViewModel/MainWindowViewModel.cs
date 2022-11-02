@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using СonstructorVVK.View;
 
+
 namespace СonstructorVVK.ViewModel
 {
-    class MainWindowViewModel
+    class MainWindowViewModel : CreateQuestionWindowViewModel
     {
+
+    
         public IMainWindowsCodeBehind CodeBehind { get; set; }
 
 
@@ -50,6 +53,11 @@ namespace СonstructorVVK.ViewModel
         /// Возвращение к главной вьюшке
         /// </summary>
         private RelayCommand _LoadMainUCCommand;
+
+        public MainWindowViewModel(IDialogService dialogService) : base(dialogService)
+        {
+        }
+
         public RelayCommand LoadMainUCCommand
         {
             get

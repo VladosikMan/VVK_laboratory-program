@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using ModelsLibrary.Questions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -10,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApplication1;
 using СonstructorVVK.ViewModel;
 
 namespace СonstructorVVK.View
@@ -32,10 +35,15 @@ namespace СonstructorVVK.View
         }
         private void CreateQuestionWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            createQuestionVM = new CreateQuestionWindowViewModel();
+            createQuestionVM = new CreateQuestionWindowViewModel(new DefaultDialogService());
             createQuestionVM.CodeBehind = this;
             this.DataContext = createQuestionVM;
-            LoadView(ViewType.Settings);
+            LoadView(ViewType.ChoiseOneQuestion);
+        }
+
+        public void SetString(String str)
+        {
+            createQuestionVM.DisplayedImagePath = str;
         }
         public void LoadView(ViewType typeView)
         {
@@ -49,12 +57,39 @@ namespace СonstructorVVK.View
                     SettingsView viewF = new SettingsView();
                     this.OutputView.Content = viewF;
                     break;
-                case ViewType.CreateQuestion:
-                    CreateQuestionView viewC = new CreateQuestionView();
+                case ViewType.ChoiseQuestion:
+                    ChoiseQuestionView viewC = new ChoiseQuestionView();
                     this.OutputView.Content = viewC;
                     break;
+                case ViewType.ChoiseOneQuestion:
+                    ChoiseOneQuestion viewO = new ChoiseOneQuestion();
+                    this.OutputView.Content = viewO;
+                    break;
+                case ViewType.TextQuestion:
+                    TextQuestionView viewT = new TextQuestionView();
+                    this.OutputView.Content = viewT;
+                    break;
+                case ViewType.SequenceQuestion:
+                    SequenceQuestionView viewQ = new SequenceQuestionView();
+                    this.OutputView.Content = viewQ;
+                    break;
+
             }
 
+        }
+        private string displayedImagePath = "/recources/images/logo.png";
+        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                displayedImagePath = openFileDialog.FileName;
+                image1.Source = new BitmapImage(new Uri(displayedImagePath));
+
+            }
+          
         }
     }
 }

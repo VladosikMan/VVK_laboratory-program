@@ -8,7 +8,7 @@ using System.Collections.Specialized;
 using ModelsLibrary.Questions.Scope;
 using ModelsLibrary.Questions.Variants;
 using СonstructorVVK.View;
-using СonstructorVVK.ViewModel;
+using WpfApplication1;
 
 namespace СonstructorVVK
 {
@@ -25,7 +25,7 @@ namespace СonstructorVVK
         }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            mainVM = new MainWindowViewModel();
+            mainVM = new MainWindowViewModel(new DefaultDialogService());
             mainVM.CodeBehind = this;
             this.DataContext = mainVM;
             LoadView(ViewType.Main);

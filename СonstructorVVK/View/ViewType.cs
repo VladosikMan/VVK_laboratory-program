@@ -12,6 +12,9 @@ namespace СonstructorVVK.View
         SettingsLab,
         SettingsSubject,
         SettingsQuestion,
-
+        ChoiseQuestion,
+        ChoiseOneQuestion,
+        TextQuestion,
+        SequenceQuestion,
     }
 }

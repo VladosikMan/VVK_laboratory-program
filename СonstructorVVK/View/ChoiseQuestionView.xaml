@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="СonstructorVVK.View.ChoiseQuestionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:СonstructorVVK.View"
+             xmlns:viewModels="clr-namespace:СonstructorVVK.ViewModel"
+             xmlns:local="clr-namespace:СonstructorVVK.View"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModels:CreateQuestionViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0"  VerticalAlignment="Top">
+            <TextBlock Text="Вариванты ответов:" FontSize="18" />
+            <Button Content="+"   Width="70" Height="20" Margin="5,5,0,0"  Command="{Binding LoadChoiseDynamicUCCommand}"/>
+            <Button Content="-"   Width="70" Height="20" Margin="5,5,0,0" Command="{Binding RemoveChoiseDynamicUCCommand}"/>
+        </StackPanel>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" >
+                <ItemsControl ItemsSource="{Binding ChoiseDynamicVMs}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <views:ChoiseDynamicView/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>
